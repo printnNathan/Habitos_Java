@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 @Service
 public class HabitoService {
@@ -35,6 +36,30 @@ public class HabitoService {
         habitoRepository.save(novoHabito);
 
         return new HabitoResponseDTO(novoHabito);
+    }
+
+    public HabitoResponseDTO atualizarHabito(UUID id, HabitoRequestDTO data) {
+        Habito habito = habitoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Hábito não encontrado"));
+
+            if(data.nome() != null) {
+                habito.setNome(data.nome());
+            }
+
+            if (data.data_ativacao() != null) {
+                habito.setData_ativacao(data.data_ativacao());
+            }
+
+            habitoRepository.save(habito);
+
+            return new HabitoResponseDTO(habito);
+    }
+
+    public void deletarHabito(UUID id) {
+        Habito habito = habitoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Hábito não encontrado"));
+
+        habitoRepository.delete(habito);
     }
 
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/habito")
@@ -30,6 +31,19 @@ public class HabitoController {
     public ResponseEntity<HabitoResponseDTO> criarHabito(@RequestBody HabitoRequestDTO data){
         HabitoResponseDTO habito = habitoService.criarHabito(data);
         return ResponseEntity.ok(habito);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<HabitoResponseDTO> atualizarHabito(@PathVariable UUID id, @RequestBody HabitoRequestDTO data) {
+        HabitoResponseDTO habito = habitoService.atualizarHabito(id, data);
+
+        return ResponseEntity.ok(habito);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarHabito(@PathVariable UUID id) {
+        habitoService.deletarHabito(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
