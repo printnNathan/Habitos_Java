@@ -62,4 +62,11 @@ public class HabitoService {
         habitoRepository.delete(habito);
     }
 
+    public HabitoResponseDTO listarPorId(UUID id) {
+        Habito habito = habitoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Hábito não encontrado"));
+
+        return new HabitoResponseDTO(habito);
+    }
+
 }

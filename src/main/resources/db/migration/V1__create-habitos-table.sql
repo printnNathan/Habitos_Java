@@ -17,7 +17,7 @@ CREATE TABLE habito (
                             FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
 );
 
-CREATE TABLE habito_completo (
+CREATE TABLE habitoCompleto (
                                  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                                  fk_habito       UUID NOT NULL,
                                  data_conclusao  DATE NOT NULL,

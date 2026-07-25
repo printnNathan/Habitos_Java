@@ -46,4 +46,10 @@ public class HabitoController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<HabitoResponseDTO> ListarPorId(@PathVariable UUID id) {
+        HabitoResponseDTO habito = habitoService.listarPorId(id);
+        return ResponseEntity.ok(habito);
+    }
+
 }
