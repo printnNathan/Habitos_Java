@@ -1,4 +1,4 @@
-package com.habitos.api.service;
+package com.habitos.api.services;
 
 import com.habitos.api.repositories.HabitoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

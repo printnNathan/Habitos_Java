@@ -1,4 +1,4 @@
-package com.habitos.api.service;
+package com.habitos.api.services;
 
 import com.habitos.api.domain.habito.Habito;
 import com.habitos.api.domain.habito.HabitoRequestDTO;
@@ -7,11 +7,9 @@ import com.habitos.api.domain.usuario.Usuario;
 import com.habitos.api.repositories.HabitoRepository;
 import com.habitos.api.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.UUID;
 
 @Service

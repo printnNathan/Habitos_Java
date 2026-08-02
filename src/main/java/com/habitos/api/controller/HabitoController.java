@@ -3,7 +3,7 @@ package com.habitos.api.controller;
 import com.habitos.api.domain.habito.Habito;
 import com.habitos.api.domain.habito.HabitoRequestDTO;
 import com.habitos.api.domain.habito.HabitoResponseDTO;
-import com.habitos.api.service.HabitoService;
+import com.habitos.api.services.HabitoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

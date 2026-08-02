@@ -1,4 +1,4 @@
-package com.habitos.api.service;
+package com.habitos.api.services;
 
 import com.habitos.api.domain.habito.Habito;
 import com.habitos.api.domain.habitoCompleto.HabitoCompletoRequestDTO;

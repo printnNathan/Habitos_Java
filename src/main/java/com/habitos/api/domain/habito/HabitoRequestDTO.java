@@ -4,6 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public record HabitoRequestDTO(String nome, Date data_ativacao, UUID fk_usuario) {
+public record HabitoRequestDTO(String nome, Date data_ativacao, String fk_usuario) {
 }
 
