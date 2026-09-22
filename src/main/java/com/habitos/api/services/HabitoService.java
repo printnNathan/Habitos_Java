@@ -67,4 +67,11 @@ public class HabitoService {
         return new HabitoResponseDTO(habito);
     }
 
+    public List<HabitoResponseDTO> listarPorUsuario(UUID usuarioId) {
+        List<Habito> habitos = habitoRepository.findByUsuario_Id(usuarioId);
+        return habitos.stream()
+                .map(HabitoResponseDTO::new)
+                .toList();
+    }
+
 }
