@@ -5,7 +5,6 @@ import com.habitos.api.domain.habitoCompleto.HabitoCompletoRequestDTO;
 import com.habitos.api.domain.habitoCompleto.HabitoCompletoResponseDTO;
 import com.habitos.api.repositories.HabitoCompletoRepository;
 import com.habitos.api.services.HabitoCompletoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,19 +15,19 @@ import java.util.UUID;
 @RequestMapping("/api/habitoCompleto")
 public class HabitoCompletoController {
 
-    @Autowired
-    private HabitoCompletoService habitoCompletoService;
+    private final HabitoCompletoService habitoCompletoService;
+    private final HabitoCompletoRepository habitoCompletoRepository;
 
-    @Autowired
-    private HabitoCompletoRepository habitoCompletoRepository;
-
-    public HabitoCompletoController(HabitoCompletoService habitoCompletoService) {
+    public HabitoCompletoController(HabitoCompletoService habitoCompletoService,
+                                    HabitoCompletoRepository habitoCompletoRepository) {
         this.habitoCompletoService = habitoCompletoService;
+        this.habitoCompletoRepository = habitoCompletoRepository;
     }
 
-
     @GetMapping
-    public List<HabitoCompleto> listar() {return habitoCompletoService.listarCompletos(); }
+    public List<HabitoCompleto> listar() {
+        return habitoCompletoService.listarCompletos();
+    }
 
     @PostMapping
     public ResponseEntity<HabitoCompletoResponseDTO> criarConclusao(@RequestBody HabitoCompletoRequestDTO data) {
@@ -37,9 +36,8 @@ public class HabitoCompletoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<HabitoCompletoResponseDTO> ListarPorId(@PathVariable UUID id) {
+    public ResponseEntity<HabitoCompletoResponseDTO> listarPorId(@PathVariable UUID id) {
         HabitoCompletoResponseDTO habitoCompleto = habitoCompletoService.listarPorId(id);
         return ResponseEntity.ok(habitoCompleto);
     }
-
 }

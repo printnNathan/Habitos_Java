@@ -5,7 +5,7 @@ import com.habitos.api.domain.habito.HabitoRequestDTO;
 import com.habitos.api.domain.habito.HabitoResponseDTO;
 import com.habitos.api.domain.usuario.Usuario;
 import com.habitos.api.services.HabitoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.habitos.api.services.HabitoCompletoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +17,13 @@ import java.util.UUID;
 @RequestMapping("/api/habito")
 public class HabitoController {
 
-    @Autowired
-    private HabitoService habitoService;
+    private final HabitoService habitoService;
+    private final HabitoCompletoService habitoCompletoService;
 
-    public HabitoController(HabitoService habitoService) {
+    public HabitoController(HabitoService habitoService, HabitoCompletoService habitoCompletoService) {
         this.habitoService = habitoService;
+        this.habitoCompletoService = habitoCompletoService;
     }
-
-   /*@GetMapping
-    public List<Habito> listar() {
-        return habitoService.listarTodos();
-    }*/
 
     @PostMapping
     public ResponseEntity<HabitoResponseDTO> criarHabito(@RequestBody HabitoRequestDTO data){
@@ -38,7 +34,6 @@ public class HabitoController {
     @PatchMapping("/{id}")
     public ResponseEntity<HabitoResponseDTO> atualizarHabito(@PathVariable UUID id, @RequestBody HabitoRequestDTO data) {
         HabitoResponseDTO habito = habitoService.atualizarHabito(id, data);
-
         return ResponseEntity.ok(habito);
     }
 
@@ -59,4 +54,17 @@ public class HabitoController {
         return habitoService.listarPorUsuario(usuarioLogado.getId());
     }
 
+    @PostMapping("/{id}/completo")
+    public ResponseEntity<Void> marcarComoConcluido(@PathVariable UUID id,
+                                                    @AuthenticationPrincipal Usuario usuarioLogado) {
+        habitoCompletoService.marcarComoConcluido(id, usuarioLogado);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}/completo")
+    public ResponseEntity<Void> desmarcarConcluido(@PathVariable UUID id,
+                                                   @AuthenticationPrincipal Usuario usuarioLogado) {
+        habitoCompletoService.desmarcarConcluido(id, usuarioLogado);
+        return ResponseEntity.noContent().build();
+    }
 }
